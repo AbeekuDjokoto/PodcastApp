@@ -1,22 +1,9 @@
-import { Link } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Redirect } from "expo-router";
+
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Text>Hello world!</Text>
-            <Link href="/about">About</Link>
-            <StatusBar style="auto" />
-        </View>
-    );
+        <Redirect href="/home" />
+    )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
