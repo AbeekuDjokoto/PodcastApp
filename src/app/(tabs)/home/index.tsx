@@ -1,23 +1,23 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from "react-native";
 import { fetchTrending } from "../../services/podcast-index";
+import { useQuery } from "@tanstack/react-query";
 
 export default function HomeScreen() {
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["trending"],
+        queryFn: () => fetchTrending(),
+    });
 
-    const onPress = async () => {
-        try {
-            const data = await fetchTrending();
-            console.log(JSON.stringify(data, null, 2));
-        } catch (error) {
-            console.error("Failed to fetch trending podcasts:", error);
-        }
-    }
+    if (isLoading) return <ActivityIndicator />;
+    if (error) return <Text>Failed to fetch trending</Text>;
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Home</Text>
-
-            <Button title="Fetch Trending" onPress={onPress} />
-        </View>
+        <FlatList
+            data={data?.feeds}
+            renderItem={({ item }) => <Text>{item.title}</Text>}
+            keyExtractor={(item) => item.id.toString()}
+            contentInsetAdjustmentBehavior="automatic"
+        />
     );
 }
 
