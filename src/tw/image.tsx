@@ -1,0 +1,32 @@
+// @ts-nocheck
+import { Image as RNImage } from "expo-image";
+import React from "react";
+import { useCssElement } from "react-native-css";
+import { StyleSheet } from "react-native";
+
+const AnimatedExpoImage = RNImage;
+
+export type ImageProps = React.ComponentProps<typeof CSSImage>;
+
+function CSSImage(props: React.ComponentProps<typeof AnimatedExpoImage>) {
+  const { objectFit, objectPosition, ...style } =
+    StyleSheet.flatten(props.style) || {};
+
+  return (
+    <AnimatedExpoImage
+      contentFit={objectFit}
+      contentPosition={objectPosition}
+      {...props}
+      source={typeof props.source === "string" ? { uri: props.source } : props.source}
+      style={style}
+    />
+  );
+}
+
+export const Image = (
+  props: React.ComponentProps<typeof CSSImage> & { className?: string }
+) => {
+  return useCssElement(CSSImage, props, { className: "style" });
+};
+
+Image.displayName = "CSS(Image)";

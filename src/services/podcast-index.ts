@@ -16,7 +16,8 @@ if (!apiKey || !apiSecret) {
 }
 
 const fetchIndex = async (path: string, options: RequestInit = {}) => {
-  // Read more about Podcast Index Authorization: https://podcastindex-org.github.io/docs-api/#auth
+  // Read more about Podcast Index Authorization:
+  // https://podcastindex-org.github.io/docs-api/#auth
 
   // ======== Hash them to get the Authorization token ========
   const time = Math.floor(Date.now() / 1000);
@@ -40,7 +41,6 @@ const fetchIndex = async (path: string, options: RequestInit = {}) => {
   };
 
   const url = `https://api.podcastindex.org/api/1.0${path}`;
-
   return fetch(url, optionsWithAuth);
 };
 
@@ -62,3 +62,4 @@ export async function fetchTrending(): Promise<{ feeds: Feed[] }> {
     );
   }
 }
+

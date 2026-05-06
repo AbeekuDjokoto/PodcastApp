@@ -92,7 +92,7 @@ export default function Page() {
     if (signIn.status === 'needs_client_trust') {
         return (
             <ThemedView style={styles.container}>
-                <ThemedText type="title" style={[styles.title, { fontSize: 24, fontWeight: 'bold' }]}>
+                <ThemedText style={[styles.title, { fontSize: 24, fontWeight: 'bold' }]}>
                     Verify your account
                 </ThemedText>
                 <TextInput
@@ -135,7 +135,7 @@ export default function Page() {
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedText type="title" style={styles.title}>
+            <ThemedText style={styles.title}>
                 Sign in
             </ThemedText>
 
@@ -181,7 +181,7 @@ export default function Page() {
             <View style={styles.linkContainer}>
                 <ThemedText>Don't have an account? </ThemedText>
                 <Link href="/auth/sign-up">
-                    <ThemedText type="link">Sign up</ThemedText>
+                    <ThemedText style={{ color: '#0a7ea4', fontWeight: '600' }}>Sign up</ThemedText>
                 </Link>
             </View>
         </ThemedView>

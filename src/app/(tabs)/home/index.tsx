@@ -1,6 +1,7 @@
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from "react-native";
-import { fetchTrending } from "../../services/podcast-index";
+import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { fetchTrending } from "@/services/podcast-index";
 import { useQuery } from "@tanstack/react-query";
+import { Text } from "@/tw";
 
 export default function HomeScreen() {
     const { data, isLoading, error } = useQuery({
@@ -8,13 +9,16 @@ export default function HomeScreen() {
         queryFn: () => fetchTrending(),
     });
 
+    console.log("data", data);
     if (isLoading) return <ActivityIndicator />;
     if (error) return <Text>Failed to fetch trending</Text>;
 
     return (
         <FlatList
             data={data?.feeds}
-            renderItem={({ item }) => <Text>{item.title}</Text>}
+            renderItem={({ item }) => (
+                <Text className="text-2xl font-bold bg-red-400">{item.title}</Text>
+            )}
             keyExtractor={(item) => item.id.toString()}
             contentInsetAdjustmentBehavior="automatic"
         />

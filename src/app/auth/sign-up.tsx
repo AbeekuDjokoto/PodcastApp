@@ -70,7 +70,7 @@ export default function Page() {
     ) {
         return (
             <ThemedView style={styles.container}>
-                <ThemedText type="title" style={styles.title}>
+                <ThemedText style={styles.title}>
                     Verify your account
                 </ThemedText>
                 <TextInput
@@ -107,7 +107,7 @@ export default function Page() {
 
     return (
         <ThemedView style={styles.container}>
-            <ThemedText type="title" style={styles.title}>
+            <ThemedText style={styles.title}>
                 Sign up
             </ThemedText>
 
@@ -153,7 +153,7 @@ export default function Page() {
             <View style={styles.linkContainer}>
                 <ThemedText>Already have an account? </ThemedText>
                 <Link href="/auth/sign-in">
-                    <ThemedText type="link">Sign in</ThemedText>
+                    <ThemedText style={{ color: '#0a7ea4', fontWeight: '600' }}>Sign in</ThemedText>
                 </Link>
             </View>
 
