@@ -1,7 +1,8 @@
-import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import { fetchTrending } from "@/services/podcast-index";
 import { useQuery } from "@tanstack/react-query";
-import { Text } from "@/tw";
+import { PodcastCard } from "@/components/home/PodcastCard";
+import { Text, View } from "@/tw";
 
 export default function HomeScreen() {
     const { data, isLoading, error } = useQuery({
@@ -9,30 +10,22 @@ export default function HomeScreen() {
         queryFn: () => fetchTrending(),
     });
 
-    console.log("data", data);
     if (isLoading) return <ActivityIndicator />;
     if (error) return <Text>Failed to fetch trending</Text>;
 
     return (
         <FlatList
             data={data?.feeds}
-            renderItem={({ item }) => (
-                <Text className="text-2xl font-bold bg-red-400">{item.title}</Text>
-            )}
+            contentContainerStyle={{ rowGap: 20, paddingTop: 8, paddingHorizontal: 12, paddingBottom: 96 }}
+            columnWrapperStyle={{ columnGap: 12 }}
+            renderItem={({ item }) =>
+                <View className="flex-1">
+                    <PodcastCard item={item} />
+                </View>
+            }
             keyExtractor={(item) => item.id.toString()}
             contentInsetAdjustmentBehavior="automatic"
+            numColumns={2}
         />
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-});
