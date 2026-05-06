@@ -19,13 +19,13 @@ export default function HomeScreen() {
             contentContainerStyle={{ rowGap: 20, paddingTop: 8, paddingHorizontal: 12, paddingBottom: 96 }}
             columnWrapperStyle={{ columnGap: 12 }}
             renderItem={({ item }) =>
-                <View className="flex-1">
-                    <PodcastCard item={item} />
+                <View key={item.id} className='flex-1 max-w-1/2'>
+                    <PodcastCard podcast={item} />
                 </View>
             }
-            keyExtractor={(item) => item.id.toString()}
             contentInsetAdjustmentBehavior="automatic"
             numColumns={2}
         />
     );
 }
+

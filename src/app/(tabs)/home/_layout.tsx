@@ -29,6 +29,13 @@ export default function HomeStackLayout() {
                     ),
                 }}
             />
+            <Stack.Screen
+                name="[id]"
+                options={{
+                    title: "Podcast",
+                    headerLargeTitle: false,
+                }}
+            />
         </Stack>
     );
 }

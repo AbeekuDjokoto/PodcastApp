@@ -1,40 +1,40 @@
 import { Feed } from "@/types";
 import { Image, Text, View } from "@/tw";
+import { Link } from "expo-router";
+import { Pressable } from "react-native";
 
 type PodcastCardProps = {
-    item: Feed;
+    podcast: Feed;
 };
 
-export function PodcastCard({ item }: PodcastCardProps) {
-    const coverImage = item.image || item.artwork;
-    const author = item.author || item.ownerName || "Unknown creator";
-    const details = [
-        item.episodeCount > 0 ? `${item.episodeCount} eps` : null,
-        item.language ? item.language.toUpperCase() : null,
-        item.explicit ? "Explicit" : "Clean",
-    ].filter(Boolean);
+export function PodcastCard({ podcast }: PodcastCardProps) {
+    const coverImage = podcast.image || podcast.artwork;
+    const author = podcast.author || podcast.ownerName || "Unknown creator";
 
     return (
-        <View className="flex-1 gap-2">
-            <Image
-                source={coverImage}
-                className="aspect-square w-full rounded-2xl"
-                contentFit="cover"
-            />
+        <Link href={`/home/${podcast.id}`} asChild>
+            <Pressable className="flex-1 gap-2">
+                <Image
+                    source={coverImage}
+                    className="aspect-square w-full rounded-2xl"
+                    contentFit="cover"
+                />
 
-            <View>
-                <Text className="text-xs font-medium" numberOfLines={2}>
-                    {item.title}
-                </Text>
+                <View>
+                    <Text className="text-xs font-medium" numberOfLines={2}>
+                        {podcast.title}
+                    </Text>
 
-                <Text className="text-[13px] text-neutral-400" numberOfLines={1}>
-                    {author}
-                </Text>
-                {/* 
+                    <Text className="text-[13px] text-neutral-400" numberOfLines={1}>
+                        {podcast.author}
+                    </Text>
+                    {/* 
                 <Text className="text-xs text-neutral-400" numberOfLines={1}>
                     {details.join(" • ")}
                 </Text> */}
-            </View>
-        </View>
+                </View>
+            </Pressable>
+        </Link>
+
     );
 }

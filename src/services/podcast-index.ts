@@ -45,7 +45,7 @@ const fetchIndex = async (path: string, options: RequestInit = {}) => {
 };
 
 export async function fetchTrending(): Promise<{ feeds: Feed[] }> {
-  const res = await fetchIndex(`/podcasts/trending`);
+  const res = await fetchIndex(`/podcasts/trending?lang=en`);
   const rawBody = await res.text();
 
   if (!res.ok) {
@@ -63,3 +63,7 @@ export async function fetchTrending(): Promise<{ feeds: Feed[] }> {
   }
 }
 
+export async function fetchFeedById(id: string): Promise<{ feed: Feed }> {
+  const res = await fetchIndex(`/podcasts/byfeedid?id=${id}`);
+  return res.json();
+}
