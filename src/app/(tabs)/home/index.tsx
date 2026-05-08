@@ -1,7 +1,7 @@
 import { ActivityIndicator, FlatList } from "react-native";
 import { fetchTrending } from "@/services/podcast-index";
 import { useQuery } from "@tanstack/react-query";
-import { PodcastCard } from "@/components/home/PodcastCard";
+import { PodcastCard } from "@/components/PodcastCard";
 import { Text, View } from "@/tw";
 
 export default function HomeScreen() {

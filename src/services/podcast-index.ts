@@ -1,5 +1,5 @@
 import * as Crypto from "expo-crypto";
-import { Feed } from "../types";
+import { Episode, Feed } from "../types";
 
 const stripWrappingQuotes = (value: string) =>
   value.replace(/^['"]|['"]$/g, "").trim();
@@ -65,5 +65,17 @@ export async function fetchTrending(): Promise<{ feeds: Feed[] }> {
 
 export async function fetchFeedById(id: string): Promise<{ feed: Feed }> {
   const res = await fetchIndex(`/podcasts/byfeedid?id=${id}`);
+  return res.json();
+}
+
+export async function fetchEpisodesByFeedId(
+  feedId: string,
+): Promise<{ items: Episode[] }> {
+  const res = await fetchIndex(`/episodes/byfeedid?id=${feedId}`);
+  return res.json();
+}
+
+export async function searchPodcasts(term: string): Promise<{ feeds: Feed[] }> {
+  const res = await fetchIndex(`/search/byterm?q=${encodeURIComponent(term)}`);
   return res.json();
 }

@@ -1,7 +1,5 @@
 import { Feed } from "@/types";
-import { Image, Text, View } from "@/tw";
-import { Link } from "expo-router";
-import { Pressable } from "react-native";
+import { Image, Text, View, Pressable, Link } from "@/tw";
 
 type PodcastCardProps = {
     podcast: Feed;
